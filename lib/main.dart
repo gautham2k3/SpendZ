@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
 }
-
+int x=0;
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      x++;
     });
   }
 
@@ -99,17 +99,35 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '$x',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () {
+          setState(() {
+            x++;
+          });
+        },
+        tooltip: "Create",
+        elevation: 0.0,
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigationBar(
+        items:  const <BottomNavigationBarItem> [
+          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_rounded),
+            label: "Home",
+            tooltip: "Home Screen",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.account_balance_rounded),
+            label: "Account",
+            tooltip: "Account Section",
+          )
+        ],
+      ),
     );
   }
 }
