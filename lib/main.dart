@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.minimize_rounded),
+                icon: const Icon(Icons.account_circle_rounded),
                 iconSize: 30,
                 onPressed:() {
                   setState(()
@@ -63,6 +63,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               )
             ],
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context,int index) {
+                return Container(
+                  margin: const EdgeInsets.all(10.0),
+                  height: 100,
+                  color: Colors.blue[100],
+                  child: const Text(
+                    "Stats View",style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
+                  ),
+                );
+              },
+              childCount: 2,
+            ),
           ),
         ],
       ),
@@ -80,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items:  const <BottomNavigationBarItem> [
           BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_rounded),
-            label: "Home",
+            label: "Dashboard",
             tooltip: "Home Screen",
           ),
           BottomNavigationBarItem(icon: Icon(Icons.account_balance_rounded),
