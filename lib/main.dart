@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 );
               },
-              childCount: 2,
+              childCount: 6,
             ),
           ),
         ],
@@ -96,6 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
+        selectedIconTheme: const IconThemeData(color: Colors.blueAccent, size: 30),
+        backgroundColor: Colors.white54,
+        showSelectedLabels: false,
         items:  const <BottomNavigationBarItem> [
           BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_rounded),
             label: "Dashboard",
