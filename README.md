@@ -37,5 +37,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 SpendZ is intended for educational purposes only and should not be used for financial advice.
 
+![Development Icon](android/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+
+> Note: The app icon used during development is for illustrative purposes only and will be changed in the stable release.
+
 ### Questions or Comments?
 If you have any questions or comments about SpendZ, please feel free to reach out to the project team at [bgautham27@gmail.com](mailto:bgautham27@gmail.com?) . We'd love to hear from you!
