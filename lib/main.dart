@@ -102,11 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
         items:  const <BottomNavigationBarItem> [
           BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_rounded),
             label: "Dashboard",
-            tooltip: "Home Screen",
+            tooltip: "Dashboard",
           ),
           BottomNavigationBarItem(icon: Icon(Icons.account_balance_rounded),
             label: "Account",
-            tooltip: "Account Section",
+            tooltip: "Account",
           )
         ],
       ),
