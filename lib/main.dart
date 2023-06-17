@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Testing App',
       home: tabs_manager(),
       debugShowCheckedModeBanner: false,
+      darkTheme: ThemeData.dark(),
     );
   }
 }

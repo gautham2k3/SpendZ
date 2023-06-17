@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'tabs_manager.dart';
+import 'Settings.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() {
@@ -23,8 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icon(Icons.settings),
                 iconSize:30 ,
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      new MaterialPageRoute(builder: (context) => new tabs_manager())
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Settings()),
                   );
                 }
             ),
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             actions: [
               IconButton(
-                icon: Icon(Icons.minimize_rounded),
+                icon: const Icon(Icons.account_circle_rounded),
                 iconSize: 30,
                 onPressed:() {
                   setState((){});
