@@ -39,7 +39,7 @@ class _tabs_manager extends State<tabs_manager> {
         elevation: 4,
         selectedIconTheme: const IconThemeData(
             color: Colors.blueAccent, size: 30),
-        backgroundColor: Colors.green[200],
+
         showSelectedLabels: true,
         selectedFontSize: 13,
         items: const <BottomNavigationBarItem>[
