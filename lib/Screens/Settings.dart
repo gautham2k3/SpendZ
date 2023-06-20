@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'Categories.dart';
 class Settings extends StatelessWidget{
   Settings ( {super.key});
-  void handelTap()
-  {
-
+  void handleTap(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Categories()),
+    );
   }
   bool lockAppSwitchVal = true;
   bool fingerprintSwitchVal = false;
@@ -50,10 +52,11 @@ class Settings extends StatelessWidget{
                         subtitle: Text("English"),
                       ),
                       const Divider(),
-                      const ListTile(
-                        leading: Icon(Icons.category_rounded),
-                        title: Text("Categories"),
-                        subtitle: Text("Add or Remove"),
+                       ListTile(
+                        leading: const Icon(Icons.category_rounded),
+                        title: const Text("Categories"),
+                        subtitle:const  Text("Add or Remove"),
+                        onTap: () => handleTap(context),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
