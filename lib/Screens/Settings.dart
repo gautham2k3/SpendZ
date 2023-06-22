@@ -47,9 +47,9 @@ class Settings extends StatelessWidget{
                         ],
                       ),
                       const ListTile(
-                        leading: Icon(Icons.language),
-                        title: Text("Language"),
-                        subtitle: Text("English"),
+                        leading: Icon(Icons.currency_rupee_rounded),
+                        title: Text("Currency"),
+                        subtitle: Text("Indian Rupee"),
                       ),
                       const Divider(),
                        ListTile(
