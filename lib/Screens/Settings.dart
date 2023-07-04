@@ -9,6 +9,25 @@ class Settings extends StatelessWidget{
       MaterialPageRoute(builder: (context) => const Categories()),
     );
   }
+  void showAlertDialog(BuildContext context) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Erase All Data'),
+        content: const Text('All the existing data will be erased and cannot be further Backed up '),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'ERASE'),
+            child: const Text('ERASE',style: TextStyle(color: Colors.red),)
+          ),
+        ],
+      ),
+    );
+  }
   bool lockAppSwitchVal = true;
   bool fingerprintSwitchVal = false;
   bool changePassSwitchVal = true;
@@ -41,7 +60,7 @@ class Settings extends StatelessWidget{
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
+                        children: const [
                           Text("Common",
                           ),
                         ],
@@ -55,6 +74,7 @@ class Settings extends StatelessWidget{
                        ListTile(
                         leading: const Icon(Icons.category_rounded),
                         title: const Text("Categories"),
+                        trailing:const Icon(Icons.keyboard_arrow_right),
                         subtitle:const  Text("Add or Remove"),
                         onTap: () => handleTap(context),
                       ),
@@ -92,6 +112,17 @@ class Settings extends StatelessWidget{
                             activeColor: Colors.redAccent,
                             onChanged: (val) {
                             }),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Text("Data"),
+                        ],
+                      ),
+                       ListTile(
+                        leading:const Icon(Icons.phonelink_erase_rounded),
+                        title:const Text("Erase all Data",selectionColor: Colors.red),
+                        onTap: () => showAlertDialog(context),
                       ),
                     ],
                   ),
