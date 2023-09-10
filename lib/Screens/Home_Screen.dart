@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  int x=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              title: Text("BUDGET"),
+              title:const  Text("SpendZ"),
             ),
             actions: [
               IconButton(
@@ -51,14 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 100,
                   color: Colors.blue[100],
                   child: Text(
-                    "Value of x : ",style: const TextStyle(
+                    "Value of x : $x",style: const TextStyle(
                     fontSize: 20,
                     color: Colors.black,
                   ),
                   ),
                 );
               },
-              childCount: 10,
+              childCount: 50,
             ),
           ),
         ],

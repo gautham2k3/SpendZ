@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Home_Screen.dart';
 import 'Login_Page.dart';
+import 'addTransactionPage.dart';
 
 class tabs_manager extends StatefulWidget {
   const tabs_manager({super.key});
@@ -28,7 +29,13 @@ class _tabs_manager extends State<tabs_manager> {
       body: _screens[_selectedIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {});
+          // Open the Add Transaction dialog
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AddTransactionPage();
+            },
+          );
         },
         tooltip: "Create",
         elevation: 0.0,
