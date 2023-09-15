@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'Data/Expense_data.dart';
 import 'Screens/tabs_manager.dart';
+import 'package:provider/provider.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -10,11 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Testing App',
-      home: tabs_manager(),
-      debugShowCheckedModeBanner: false,
-      // darkTheme: ThemeData.dark(),
+    return ChangeNotifierProvider(create: (context) => ExpenseData(),
+      builder: (context,child) =>  MaterialApp(
+        title: 'Testing App',
+        home: const tabs_manager(),
+        debugShowCheckedModeBanner: false,
+        //darkTheme: ThemeData.dark().copyWith(useMaterial3: true),
+        theme: ThemeData().copyWith(useMaterial3: false),
+      ),
     );
   }
 }

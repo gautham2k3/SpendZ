@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../Data/Expense_data.dart';
+import '../Model/Expense_item.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -23,7 +27,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   String? title;
   double? amount;
   String? selectedCategory; // Selected category
-
+  DateTime? dateTime;
   // Create text editing controllers for the input fields
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
@@ -34,13 +38,73 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   // Function to handle form submission
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      dateTime=DateTime.now();
       // Perform your transaction saving logic here
       // For this example, we'll just print the details
       print('Title: $title');
       print('Amount: $amount');
       print('Category: $selectedCategory');
+      print('Date & Time: $dateTime');
 
       // You can save the transaction data to a database or a state management solution here
+      ExpenseItem newExpense=ExpenseItem(
+          name: title.toString(),
+          dateTime: DateTime.now(),
+          amount: amount.toString()
+      );
+
+      setState(() {
+        Provider.of<ExpenseData>(context,listen: false).addExpense(newExpense);
+      });
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: const EdgeInsets.all(0), // Remove padding
+            content: Container(
+              // decoration: BoxDecoration(
+              //   // shape: BoxShape.circle, // Make it circular
+              //   color: Colors.white, // Set background color
+              // ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const CircleAvatar(
+                    radius: 50, // Adjust the size as needed
+                    backgroundColor: Colors.blue, // Circle background color
+                    child: Icon(
+                      Icons.check,
+                      size: 60,
+                      color: Colors.white,
+                    ),
+                    // Replace with your image
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Expense Submitted',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  TextButton(
+                    child:const Text('OK',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.pop(context);// Close the dialog
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
     }
   }
 
@@ -98,9 +162,9 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(
+                decoration:const InputDecoration(
                   labelText: 'Category',
                   border: OutlineInputBorder(),
                   filled: true,
@@ -129,10 +193,10 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Add Transaction'),
+                child: const Text('Add Transaction'),
               ),
             ],
           ),
