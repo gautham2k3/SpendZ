@@ -89,7 +89,7 @@ class Settings extends StatelessWidget{
                         title: const Text("Lock app in background"),
                         trailing: Switch(
                             value: lockAppSwitchVal,
-                            activeColor: Colors.redAccent,
+                            activeColor: Colors.blueAccent,
                             onChanged: (val) {
                             }),
 
@@ -100,7 +100,7 @@ class Settings extends StatelessWidget{
                         title: const Text("Use fingerprint"),
                         trailing: Switch(
                             value: fingerprintSwitchVal,
-                            activeColor: Colors.redAccent,
+                            activeColor: Colors.blueAccent,
                             onChanged: (val) { }),
                       ),
                       const Divider(),
@@ -109,7 +109,7 @@ class Settings extends StatelessWidget{
                         title: const Text("Change Password"),
                         trailing: Switch(
                             value: changePassSwitchVal,
-                            activeColor: Colors.redAccent,
+                            activeColor: Colors.blueAccent,
                             onChanged: (val) {
                             }),
                       ),
@@ -126,6 +126,7 @@ class Settings extends StatelessWidget{
                       ),
                     ],
                   ),
+
                 ),
               )
             ])
