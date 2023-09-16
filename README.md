@@ -15,6 +15,15 @@ SpendZ is a mobile app built using Flutter that helps users track and manage the
 - Cross-device compatibility
 - Built using Flutter framework
 
+## Technology Used
+
+SpendZ makes use of various technologies and libraries to provide its functionality. Some of the key technologies and libraries used in this project include:
+
+- **Hive**: Hive is used for local data storage in SpendZ, providing efficient and persistent storage for expense data.
+
+- **Flutter**: SpendZ is built using the Flutter framework, enabling cross-platform compatibility and a rich user interface.
+
+
 ## Getting Started
 
 To get started with SpendZ, follow these steps:
