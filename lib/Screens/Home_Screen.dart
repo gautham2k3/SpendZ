@@ -4,6 +4,7 @@ import 'Settings.dart';
 import 'package:provider/provider.dart';
 
 
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() {
@@ -13,7 +14,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int balance = 1000; // Example balance value, replace with your actual balance
-
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<ExpenseData>(context,listen: false).prepareData();
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<ExpenseData>(

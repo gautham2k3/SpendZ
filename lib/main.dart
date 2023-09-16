@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'Data/Expense_data.dart';
 import 'Screens/tabs_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox("expense_database");
   runApp(const MyApp());
 }
 
