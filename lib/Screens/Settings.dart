@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:spendz/Data/Expense_data.dart';
 import 'Categories.dart';
+import 'package:provider/provider.dart';
+
 class Settings extends StatelessWidget{
   Settings ( {super.key});
   void handleTap(BuildContext context) {
@@ -21,7 +24,10 @@ class Settings extends StatelessWidget{
             child: const Text('Cancel'),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, 'ERASE'),
+            onPressed: () {
+              Provider.of<ExpenseData>(context,listen: false).clearAllExpenses();
+              Navigator.pop(context, 'ERASE');
+            },
             child: const Text('ERASE',style: TextStyle(color: Colors.red),)
           ),
         ],
@@ -120,7 +126,7 @@ class Settings extends StatelessWidget{
                         ],
                       ),
                        ListTile(
-                        leading:const Icon(Icons.phonelink_erase_rounded),
+                        leading:const Icon(Icons.phonelink_erase_rounded, color: Colors.red,),
                         title:const Text("Erase all Data",selectionColor: Colors.red),
                         onTap: () => showAlertDialog(context),
                       ),
