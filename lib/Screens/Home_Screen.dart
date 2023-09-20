@@ -20,6 +20,30 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     Provider.of<ExpenseData>(context,listen: false).prepareData();
   }
+  IconData getCategoryIcon(String name) {
+    String lowercaseName = name.toLowerCase();
+    if (lowercaseName.contains('food') ||
+        lowercaseName.contains('juice') ||
+        lowercaseName.contains('grocery')) {
+      return Icons.fastfood; // Use the food icon
+    } else if (lowercaseName.contains('education') ||
+        lowercaseName.contains('school') ||
+        lowercaseName.contains('college') ||
+        lowercaseName.contains('xerox') ||
+        lowercaseName.contains('pen')) {
+      return Icons.school_outlined; // Use the education icon
+    }
+    else if (lowercaseName.contains('netflix') ||
+        lowercaseName.contains('spotify') ||
+        lowercaseName.contains('prime') ||
+        lowercaseName.contains('hotstar') ||
+        lowercaseName.contains('ott')) {
+      return Icons.subscriptions_rounded; // Use the education icon
+    }
+    else {
+      return Icons.category_outlined; // Use a default icon for other categories
+    }
+  }
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
@@ -77,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: double.infinity,
                     height: 110*fem,
                     decoration: BoxDecoration (
-                      color: Color(0xfff2f2f7),
+                      color: const Color(0xfff2f2f7),
                       borderRadius: BorderRadius.circular(13*fem),
                     ),
                     child: Stack(
@@ -200,7 +224,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: value.getExpenseList().length,
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
+                      IconData categoryIcon = getCategoryIcon(value.getExpenseList()[index].name);
                       return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          child: Icon(
+                            categoryIcon,
+                            size: 30 * fem,
+                            color: Colors.white,
+                          ),
+                        ),
                         title: Text(value.getExpenseList()[index].name),
                         subtitle: Text(
                             '${value.getExpenseList()[index].dateTime.hour}:'
