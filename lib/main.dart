@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         home: const tabs_manager(),
         debugShowCheckedModeBanner: false,
         //darkTheme: ThemeData.dark().copyWith(useMaterial3: true),
-        theme: ThemeData().copyWith(useMaterial3: false),
+        theme: ThemeData().copyWith(useMaterial3: true),
       ),
     );
   }

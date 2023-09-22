@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../Data/Expense_data.dart';
 import '../Model/Expense_item.dart';
 
+enum TypeEI {expense,income}
 
 void main() {
   runApp(MyApp());
@@ -23,6 +24,7 @@ class AddTransactionPage extends StatefulWidget {
 }
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
+  Set<TypeEI> selectedAccessories = <TypeEI>{TypeEI.expense};
   // Variables to store transaction details
   String? title;
   double? amount;
@@ -128,9 +130,37 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SegmentedButton<TypeEI>(
+                selected: selectedAccessories,
+                onSelectionChanged: (Set<TypeEI> newSelection) {
+                  setState(() {
+                    selectedAccessories = newSelection;
+                  });
+                },
+                emptySelectionAllowed: true,
+                showSelectedIcon: false,
+                selectedIcon: const Icon(Icons.check_circle),
+                // style: buttonStyle,
+                segments: const <ButtonSegment<TypeEI>>[
+                  ButtonSegment<TypeEI>(
+                    value: TypeEI.expense,
+                    label: Text('Expense'),
+                    icon: Icon(Icons.upload_rounded),
+                  ),
+                  ButtonSegment<TypeEI>(
+                    value: TypeEI.income,
+                    label: Text('Income'),
+                    icon: Icon(Icons.download),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _titleController,
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration:const InputDecoration(
+                  border: OutlineInputBorder(),
+                    filled: true,
+                    labelText: 'Title'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a title';
@@ -143,9 +173,14 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   });
                 },
               ),
+              const SizedBox(height: 5),
               TextFormField(
                 controller: _amountController,
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration:const InputDecoration(
+                  border: OutlineInputBorder(),
+                    filled: true,
+                    labelText: 'Amount'
+                ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
