@@ -25,7 +25,7 @@ class AddTransactionPage extends StatefulWidget {
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
   Set<TypeEI> selectedAccessories = <TypeEI>{TypeEI.expense};
-  int selectedIndex =0;
+  TypeEI selectedIndex =TypeEI.expense;
   // Variables to store transaction details
   String? title;
   double? amount;
@@ -136,7 +136,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 onSelectionChanged: (Set<TypeEI> newSelection) {
                   setState(() {
                     selectedAccessories = newSelection;
-                    selectedIndex=1;
+                    selectedIndex=newSelection.first;
                   });
                 },
                 emptySelectionAllowed: true,
@@ -177,10 +177,10 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               const SizedBox(height: 5),
               TextFormField(
                 controller: _amountController,
-                decoration:const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  border:const OutlineInputBorder(),
                     filled: true,
-                    labelText: 'Amount'
+                    labelText: selectedIndex==TypeEI.expense ? 'Expense': 'Income',
                 ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
@@ -200,7 +200,10 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               ),
               const SizedBox(height: 20),
               Visibility(
-                visible: selectedIndex==1,
+                visible: selectedIndex==TypeEI.expense,
+                  maintainState: true,
+                  maintainAnimation: true,
+                  maintainSize: true,
                   child: DropdownButtonFormField<String>(
                 decoration:const InputDecoration(
                   labelText: 'Category',
@@ -216,7 +219,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 items: [
                   'Stationery',
                   'Food',
-                  'Other',
+                  'Entertainment',
                   'Miscellaneous',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -235,7 +238,16 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: const Text('Add Transaction'),
+                style: ButtonStyle(
+                  side: MaterialStateProperty.all(
+                    const BorderSide(
+                      color: Colors.blue,
+                      width: 1,
+                    ),
+                  ),
+                ),
+                child: const Text('Add Transaction'
+                ),
               ),
             ],
           ),
