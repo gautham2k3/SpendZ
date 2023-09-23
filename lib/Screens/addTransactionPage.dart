@@ -25,6 +25,7 @@ class AddTransactionPage extends StatefulWidget {
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
   Set<TypeEI> selectedAccessories = <TypeEI>{TypeEI.expense};
+  int selectedIndex =0;
   // Variables to store transaction details
   String? title;
   double? amount;
@@ -135,12 +136,12 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 onSelectionChanged: (Set<TypeEI> newSelection) {
                   setState(() {
                     selectedAccessories = newSelection;
+                    selectedIndex=1;
                   });
                 },
                 emptySelectionAllowed: true,
                 showSelectedIcon: false,
                 selectedIcon: const Icon(Icons.check_circle),
-                // style: buttonStyle,
                 segments: const <ButtonSegment<TypeEI>>[
                   ButtonSegment<TypeEI>(
                     value: TypeEI.expense,
@@ -198,7 +199,9 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 },
               ),
               const SizedBox(height: 20),
-              DropdownButtonFormField<String>(
+              Visibility(
+                visible: selectedIndex==1,
+                  child: DropdownButtonFormField<String>(
                 decoration:const InputDecoration(
                   labelText: 'Category',
                   border: OutlineInputBorder(),
@@ -227,6 +230,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   }
                   return null;
                 },
+              ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
