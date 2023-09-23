@@ -8,7 +8,22 @@ class tabs_manager extends StatefulWidget {
   @override
   State<tabs_manager> createState() => _tabs_manager();
 }
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => AddTransactionPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.5);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
 class _tabs_manager extends State<tabs_manager> {
   int currentPageIndex = 0;
   var _selectedIndex = 0;
@@ -29,13 +44,7 @@ class _tabs_manager extends State<tabs_manager> {
       body: _screens[_selectedIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Open the Add Transaction dialog
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AddTransactionPage();
-            },
-          );
+          Navigator.of(context).push(_createRoute());
         },
         tooltip: "Create",
         elevation: 0.0,
