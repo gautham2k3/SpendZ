@@ -81,6 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Colors.blueAccent,
                           ),
                           child: const TextField(
+
+                            keyboardType: TextInputType.visiblePassword,
                             style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -121,57 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         const SizedBox(height: 35),
-                        const Center(
-                          child: Text(
-                            '- Or Sign In with -',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
-                              },
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white38,
-                                ),
-                                child: Image.asset('assets/google_icon.png'),
-                              ),
-                            ),
-                            const SizedBox(width: 50),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
-                              },
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white38,
-                                ),
-                                child: Image.asset('assets/facebook_icon.png'),
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),
