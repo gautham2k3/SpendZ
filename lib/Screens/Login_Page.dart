@@ -9,6 +9,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool passwordVisible=false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,41 +38,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Text(
-                          'Email',
-                          style: TextStyle(
-                            color: Colors.blue.shade900,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                         const SizedBox(height: 10),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: Colors.blueAccent,
+                            color: Colors.blue,
                           ),
-                          child: const TextField(
-                            style: TextStyle(color: Colors.white),
+                          child: TextField(
                             decoration: InputDecoration(
-                              border: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.email,
-                                color: Colors.white,
-                              ),
-                              hintText: 'Email',
-                              hintStyle: TextStyle(color: Colors.white),
+                              border: const UnderlineInputBorder(),
+                              hintText: "Email",
+                              labelText: "Email ID",
+                              helperText: "Example : XYZ@gmail.com",
+                              suffixIcon: IconButton(onPressed: () {}, icon: const Icon(Icons.email_outlined)),
+                              alignLabelWithHint: true,
+                              filled: true,
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                         Text(
-                          'Password',
-                          style: TextStyle(
-                            color: Colors.blue.shade900,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.done,
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -80,19 +64,31 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.blueAccent,
                           ),
-                          child: const TextField(
-
-                            keyboardType: TextInputType.visiblePassword,
-                            style: TextStyle(color: Colors.white),
+                          child: TextField(
+                            obscureText: passwordVisible,
                             decoration: InputDecoration(
-                              border: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.white,
+                              border: const UnderlineInputBorder(),
+                              hintText: "Password",
+                              labelText: "Password",
+                              helperText:"Password must contain special character",
+                              helperStyle:const TextStyle(color:Colors.black54),
+                              suffixIcon: IconButton(
+                                icon: Icon(passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                onPressed: () {
+                                  setState(
+                                        () {
+                                      passwordVisible = !passwordVisible;
+                                    },
+                                  );
+                                },
                               ),
-                              hintText: 'Password',
-                              hintStyle: TextStyle(color: Colors.white),
+                              alignLabelWithHint: true,
+                              filled: true,
                             ),
+                            keyboardType: TextInputType.visiblePassword,
+                            textInputAction: TextInputAction.done,
                           ),
                         ),
                         const SizedBox(height: 35),
