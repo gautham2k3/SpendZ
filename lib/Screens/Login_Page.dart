@@ -3,6 +3,7 @@ import 'Second_Screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -37,57 +38,62 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                         Text(
+                          'Email',
+                          style: TextStyle(
+                            color: Colors.blue.shade900,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: Colors.blue.shade200,
+                            color: Colors.blueAccent,
                           ),
-                          child: TextField(
+                          child: const TextField(
+                            style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
-                              border: const UnderlineInputBorder(),
-                              hintText: "Email",
-                              labelText: "Email ID",
-                              helperText: "Example : XYZ@gmail.com",
-                              suffixIcon: IconButton(onPressed: () {}, icon: const Icon(Icons.email_outlined)),
-                              alignLabelWithHint: true,
-                              filled: true,
+                              border: InputBorder.none,
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Colors.white,
+                              ),
+                              hintText: 'Email',
+                              hintStyle: TextStyle(color: Colors.white),
                             ),
-                            keyboardType: TextInputType.emailAddress,
-                            textInputAction: TextInputAction.done,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                         Text(
+                          'Password',
+                          style: TextStyle(
+                            color: Colors.blue.shade900,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+
                           ),
                         ),
                         const SizedBox(height: 15),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: Colors.blue.shade200,
+                            color: Colors.blueAccent,
                           ),
-                          child: TextField(
-                            obscureText: passwordVisible,
-                            decoration: InputDecoration(
-                              border: const UnderlineInputBorder(),
-                              hintText: "Password",
-                              labelText: "Password",
-                              helperText:"Password must contain special character",
-                              helperStyle:const TextStyle(color:Colors.black54),
-                              suffixIcon: IconButton(
-                                icon: Icon(passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                onPressed: () {
-                                  setState(
-                                        () {
-                                      passwordVisible = !passwordVisible;
-                                    },
-                                  );
-                                },
-                              ),
-                              alignLabelWithHint: true,
-                              filled: true,
-                            ),
+                          child: const TextField(
+
                             keyboardType: TextInputType.visiblePassword,
-                            textInputAction: TextInputAction.done,
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              prefixIcon: Icon(
+                                Icons.lock,
+                                color: Colors.white,
+                              ),
+                              hintText: 'Password',
+                              hintStyle: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 35),
