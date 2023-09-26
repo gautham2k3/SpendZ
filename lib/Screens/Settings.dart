@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spendz/Data/Expense_data.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'Categories.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_icons/simple_icons.dart';
+
 
 class Settings extends StatelessWidget{
   Settings ( {super.key});
@@ -37,8 +40,10 @@ class Settings extends StatelessWidget{
   bool lockAppSwitchVal = true;
   bool fingerprintSwitchVal = false;
   bool changePassSwitchVal = true;
+
   @override
   Widget build(BuildContext context) {
+    final toLaunch = Uri.parse('https://github.com/gautham2k3/SpendZ');
     return Scaffold(
         body :CustomScrollView(
             slivers: [
@@ -137,8 +142,18 @@ class Settings extends StatelessWidget{
                         ],
                       ),
                       ListTile(
-                        leading: const Icon(Icons.link),
-                        title: const Text("Github"),
+                        leading: const Icon(SimpleIcons.github, color: Colors.black),
+                        title: const Text("GitHub"),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.link),
+                          tooltip: 'Open Link in Browser',
+                          onPressed: () {
+                            launchUrl(
+                              toLaunch,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
