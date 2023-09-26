@@ -130,6 +130,16 @@ class Settings extends StatelessWidget{
                         title:const Text("Erase all Data",selectionColor: Colors.red),
                         onTap: () => showAlertDialog(context),
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Text("Social"),
+                        ],
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.link),
+                        title: const Text("Github"),
+                      ),
                     ],
                   ),
 
