@@ -144,8 +144,9 @@ class Settings extends StatelessWidget{
                       ListTile(
                         leading: const Icon(SimpleIcons.github, color: Colors.black),
                         title: const Text("GitHub"),
+                        subtitle: const Text('Star & Share the Repo'),
                         trailing: IconButton(
-                          icon: const Icon(Icons.link),
+                          icon: const Icon(Icons.open_in_new),
                           tooltip: 'Open Link in Browser',
                           onPressed: () {
                             launchUrl(
