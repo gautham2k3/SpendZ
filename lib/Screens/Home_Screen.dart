@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendz/Screens/Balance_Overview.dart';
 import '../Data/Expense_data.dart';
 import 'Settings.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Stack(
                       children: [
                         // Positioned(
-                        //   // rectangle3n3j (203:17)
                         //   left: 120*fem,
                         //   top: 42*fem,
                         //   child: ImageFiltered(
@@ -130,7 +130,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         //   ),
                         // ),
                         Positioned(
-                          // rectangle2erd (198:15)
                           left: 0*fem,
                           top: 0*fem,
                           child: Align(
@@ -147,7 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Positioned(
-                          // Aa5 (198:16)
                           left: 16*fem,
                           top: 45*fem,
                           child: Align(
@@ -169,7 +167,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Positioned(
-                          // mybalanceTZB (198:17)
                           left: 16*fem,
                           top: 24*fem,
                           child: Align(
@@ -190,19 +187,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Positioned(
-                          // xkq (198:18)
-                          left: 305*fem,
-                          top: 38*fem,
-                          child: Align(
-                            child: SizedBox(
-                              width: 11*fem,
-                              height: 18*fem,
-                              child: Center(
+                          left: 300 * fem,
+                          top: 30 * fem,
+                          child: GestureDetector(
+                            onTap: () {
+                              // refreshB();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>
+                                    BalanceOverview(number: balance.toInt())),
+                              );
+                            },
+                            child: Align(
+                              child: SizedBox(
+                                width: 40 * fem,
+                                height: 50 * fem,
                                 child: Center(
-                                  child: Icon(
-                                    Icons.navigate_next_rounded, // Replace 'Icons.star' with the Material Icon you want
-                                    size: 35 * fem,
-                                    color: Colors.white, // You can specify the color you want
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.navigate_next_rounded,
+                                      // Replace 'Icons.star' with the Material Icon you want
+                                      size: 35 * fem,
+                                      color: Colors
+                                          .white, // You can specify the color you want
+                                    ),
                                   ),
                                 ),
                               ),
