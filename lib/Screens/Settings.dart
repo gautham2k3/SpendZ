@@ -45,23 +45,19 @@ class Settings extends StatelessWidget{
   Widget build(BuildContext context) {
     final toLaunch = Uri.parse('https://github.com/gautham2k3/SpendZ');
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon:const Icon(Icons.navigate_before_rounded),
+            iconSize: 30,
+            onPressed: () {
+              Navigator.pop(context);
+            }
+        ),
+        title:const Text('Settings'),
+        centerTitle: true,
+      ),
         body :CustomScrollView(
             slivers: [
-              SliverAppBar(
-                floating: true,
-                forceElevated: true,
-                leading: IconButton(
-                    icon: Icon(Icons.navigate_before_rounded),
-                    iconSize:30 ,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text("Settings"),
-                ),
-              ),
               SliverToBoxAdapter(
                 child: Container(
                   padding: const EdgeInsets.all(12),
