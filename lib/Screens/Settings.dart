@@ -96,17 +96,6 @@ class Settings extends StatelessWidget{
                         ],
                       ),
                       ListTile(
-                        leading: const Icon(Icons.phonelink_lock_outlined),
-                        title: const Text("Lock app in background"),
-                        trailing: Switch(
-                            value: lockAppSwitchVal,
-                            activeColor: Colors.blueAccent,
-                            onChanged: (val) {
-                            }),
-
-                      ),
-                      const Divider(),
-                      ListTile(
                         leading: const Icon(Icons.fingerprint),
                         title: const Text("Use fingerprint"),
                         trailing: Switch(
@@ -141,6 +130,7 @@ class Settings extends StatelessWidget{
                           Text("Social"),
                         ],
                       ),
+                      const Divider(),
                       ListTile(
                         leading: const Icon(SimpleIcons.github, color: Colors.black),
                         title: const Text("GitHub"),
@@ -156,6 +146,7 @@ class Settings extends StatelessWidget{
                           },
                         ),
                       ),
+                      const Divider(),
                     ],
                   ),
 
