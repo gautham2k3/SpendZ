@@ -23,6 +23,20 @@ class _BalanceOverviewState extends State<BalanceOverview> {
         ),
         title:const Text('Balance Overview'),
       ),
+      body: Container(
+        ),
+      floatingActionButton: FloatingActionButton(
+        focusColor: Colors.white54,
+        onPressed: () {
+
+        },
+        shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 3,color: Colors.white54),
+            borderRadius: BorderRadius.circular(100)
+        ),
+        child: const Icon(Icons.refresh),
+      ),
+
     );
   }
 }
