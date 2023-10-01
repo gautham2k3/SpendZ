@@ -8,7 +8,10 @@ import 'package:spendz/utils.dart';
 
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() {
     return _HomeScreenState();
   }
@@ -180,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontSize: 15*ffem,
                                   fontWeight: FontWeight.w400,
                                   height: 1.3333333333*ffem/fem,
-                                  color: Color(0xffffffff),
+                                  color: const Color(0xffffffff),
                                 ),
                               ),
                             ),
