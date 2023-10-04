@@ -6,7 +6,6 @@ import 'Categories.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_icons/simple_icons.dart';
 
-
 class Settings extends StatelessWidget{
   Settings ( {super.key});
   void handleTap(BuildContext context) {
@@ -30,6 +29,13 @@ class Settings extends StatelessWidget{
             onPressed: () {
               Provider.of<ExpenseData>(context,listen: false).clearAllExpenses();
               Navigator.pop(context, 'ERASE');
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: const Text('All Data Deleted'),
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ));
             },
             child: const Text('ERASE',style: TextStyle(color: Colors.red),)
           ),
