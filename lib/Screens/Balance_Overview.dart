@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../API/Number_Fact.dart';
 import '../Design/FrostedGlass.dart';
-
 class BalanceOverview extends StatefulWidget {
   final int number;
   BalanceOverview({required this.number});
@@ -15,6 +15,11 @@ class _BalanceOverviewState extends State<BalanceOverview> {
   void initState() {
     super.initState();
     balanceO = widget.number.toString();
+    fetchNumberFact('trivia', widget.number.toString()).then((value) {
+      setState(() {
+        fact = value;
+      });
+    });
   }
 
   @override
@@ -59,9 +64,8 @@ class _BalanceOverviewState extends State<BalanceOverview> {
                 theHeight: 100.0,
                 theChild: Text(
                   fact,
-                  style:const TextStyle(
-                    color: Colors.white54,
-                  ),
+                  style: const TextStyle(color: Colors.white70, fontSize: 20.0),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -71,7 +75,12 @@ class _BalanceOverviewState extends State<BalanceOverview> {
       ),
       floatingActionButton: FloatingActionButton(
         focusColor: Colors.white54,
-        onPressed: () {},
+        onPressed: () {fetchNumberFact('trivia', widget.number.toString()).then((value) {
+          setState(() {
+            fact = value;
+          });
+        });
+        },
         shape: RoundedRectangleBorder(
           side: const BorderSide(width: 3, color: Colors.white54),
           borderRadius: BorderRadius.circular(100),
