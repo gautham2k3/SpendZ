@@ -24,6 +24,12 @@ class ExpenseData extends ChangeNotifier {
     db.saveData(overallExpenseList);
   }
 
+  void addIncome(ExpenseItem newIncome) {
+    overallExpenseList.add(newIncome);
+    notifyListeners();
+    db.saveData(overallExpenseList);
+  }
+
   void deleteExpense(ExpenseItem expense) {
     overallExpenseList.remove(expense);
     db.saveData(overallExpenseList);
