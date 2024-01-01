@@ -231,16 +231,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(0, 225, 0, 0),
-                      child: const Text(
-                        'Transaction History',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                    const SizedBox(
+                      height: 200,
+                    ),
+                    Text(
+                      'Transaction History',
+                      style: SafeGoogleFont(
+                        'Play',
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    ListView.builder(
+                    SizedBox(
+                      height:300,
+                      child: ListView.builder(
                       shrinkWrap: true,
+                      reverse: true,
                       itemCount: value
                           .getExpenseList()
                           .length,
@@ -278,6 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                     ),
+          ),
                   ],
                 ),
               ),
