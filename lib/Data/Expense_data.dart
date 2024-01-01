@@ -11,6 +11,16 @@ class ExpenseData extends ChangeNotifier {
   List<ExpenseItem> getExpenseList() {
     return overallExpenseList;
   }
+
+  double getBalance(){
+    return db.readBalance();
+  }
+
+  void setBalance(double balance){
+    db.saveBalance(balance);
+    notifyListeners();
+  }
+
   void prepareData() {
     if(db.readData().isNotEmpty)
     {

@@ -19,6 +19,12 @@ class HiveDataBase {
     //storing the hive box
     _myBox.put("All Expenses", allExpensesFormatted);
   }
+  void saveBalance(double balance) {
+    _myBox.put("Balance", balance);
+  }
+  double readBalance() {
+    return _myBox.get("Balance") ?? 0.0; // Default to 0.0 if no balance is stored.
+  }
 
   List<ExpenseItem> readData() {
     List savedExpenses = _myBox.get("All Expenses")?? [] ;

@@ -108,6 +108,55 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           );
         },
       );
+    } else {
+      double leftBalance=Provider.of<ExpenseData>(context,listen: false).getBalance()+amount!;
+      dateTime=DateTime.now();
+      ExpenseItem newIncome=ExpenseItem(
+          name: "Income27",
+          dateTime: DateTime.now(),
+          amount: amount.toString()
+      );
+      setState(() {
+        Provider.of<ExpenseData>(context,listen: false).addExpense(newIncome);
+      });
+      Provider.of<ExpenseData>(context,listen: false).setBalance(leftBalance);
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(0), // Remove padding
+            content: Container(
+              // decoration: BoxDecoration(
+              //   // shape: BoxShape.circle, // Make it circular
+              //   color: Colors.white, // Set background color
+              // ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Text(
+                    'Balance Updated',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                    child:const Text('OK',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.pop(context);// Close the dialog
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
     }
   }
 
