@@ -41,6 +41,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   // Function to handle form submission
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      double leftBalance=Provider.of<ExpenseData>(context,listen: false).getBalance()-amount!;
       dateTime=DateTime.now();
       // Perform your transaction saving logic here
       // For this example, we'll just print the details
@@ -58,6 +59,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
       setState(() {
         Provider.of<ExpenseData>(context,listen: false).addExpense(newExpense);
+        Provider.of<ExpenseData>(context,listen: false).setBalance(leftBalance);
       });
 
       showDialog(
