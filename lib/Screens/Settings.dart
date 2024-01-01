@@ -8,11 +8,28 @@ import 'package:simple_icons/simple_icons.dart';
 
 class Settings extends StatelessWidget{
   Settings ( {super.key});
+  String? selectedCurrency = "None";
+  List<String> currency = [    "None", "Rupee - ₹", "Dollar - \$ ", "Euro - €"  ];
   void handleTap(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const Categories()),
     );
+  }
+  SimpleDialog CurencyHandler(BuildContext context) {
+   return SimpleDialog(
+     title: const Text('Phone Ringtone'),
+     children: currency.map((r) => RadioListTile(
+       title:  Text(r),
+       groupValue: selectedCurrency,
+       selected: r == selectedCurrency,
+       value: r,
+       onChanged: (dynamic val) {
+           selectedCurrency = val;
+           Navigator.of(context).pop();
+       },
+     )).toList(),
+   );
   }
   void showAlertDialog(BuildContext context) {
     showDialog<String>(
@@ -78,10 +95,18 @@ class Settings extends StatelessWidget{
                           ),
                         ],
                       ),
-                      const ListTile(
-                        leading: Icon(Icons.currency_rupee_rounded),
-                        title: Text("Currency"),
-                        subtitle: Text("Indian Rupee"),
+                       ListTile(
+                        leading: const Icon(Icons.currency_rupee_rounded),
+                        title: const Text("Currency"),
+                        subtitle: Text(selectedCurrency!),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return CurencyHandler(context);
+                            },
+                          );
+                        },
                       ),
                       const Divider(),
                        ListTile(
