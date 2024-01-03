@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:spendz/Data/hive_database.dart';
 import '../Model/Expense_item.dart';
@@ -7,6 +8,7 @@ class ExpenseData extends ChangeNotifier {
   final db=HiveDataBase();
 
   List<ExpenseItem> overallExpenseList = [];
+  List<int> savedSettings = [5];
 
   List<ExpenseItem> getExpenseList() {
     return overallExpenseList;
@@ -43,6 +45,10 @@ class ExpenseData extends ChangeNotifier {
   void deleteExpense(ExpenseItem expense) {
     overallExpenseList.remove(expense);
     db.saveData(overallExpenseList);
+  }
+
+  void addSettings(int settingNum,int newSetting) {
+    savedSettings[settingNum]=newSetting;
   }
 
   void clearAllExpenses() {
