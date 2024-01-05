@@ -8,7 +8,7 @@ class ExpenseData extends ChangeNotifier {
   final db=HiveDataBase();
 
   List<ExpenseItem> overallExpenseList = [];
-  List<int> savedSettings = [5];
+  List<int> savedSettings = [0,0,0,0];
 
   List<ExpenseItem> getExpenseList() {
     return overallExpenseList;
@@ -21,6 +21,11 @@ class ExpenseData extends ChangeNotifier {
   void setBalance(double balance){
     db.saveBalance(balance);
     notifyListeners();
+  }
+  int getSavedSettings(int settingNum) {
+    savedSettings[0]=db.getSettings();
+    print(db.getSettings());
+    return savedSettings[0];
   }
 
   void prepareData() {
@@ -49,6 +54,9 @@ class ExpenseData extends ChangeNotifier {
 
   void addSettings(int settingNum,int newSetting) {
     savedSettings[settingNum]=newSetting;
+    db.saveSettings(savedSettings);
+    print(savedSettings);
+    notifyListeners();
   }
 
   void clearAllExpenses() {

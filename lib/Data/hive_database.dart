@@ -23,10 +23,10 @@ class HiveDataBase {
     _myBox.put("Balance", balance);
   }
   void saveSettings(List<int> newSettings) {
-    _myBox.put("Settings",newSettings);
+    _myBox.put("Settings",newSettings[0]);
   }
-  List<int> getSettings() {
-    return _myBox.get("Settings") ?? [];
+  int getSettings() {
+    return _myBox.get("Settings")?? 0;
   }
   double readBalance() {
     return _myBox.get("Balance") ?? 0.0; // Default to 0.0 if no balance is stored.
