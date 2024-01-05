@@ -8,8 +8,9 @@ import 'package:simple_icons/simple_icons.dart';
 
 class Settings extends StatelessWidget{
   Settings ( {super.key});
-  String? selectedCurrency = "None";
+  int selectedCurrency = 0;
   List<String> currency = [    "None", "Rupee - ₹", "Dollar - \$ ", "Euro - €"  ];
+  List<int> cur=[0,1,2,3];
   void handleTap(BuildContext context) {
     Navigator.push(
       context,
@@ -18,14 +19,15 @@ class Settings extends StatelessWidget{
   }
   SimpleDialog CurencyHandler(BuildContext context) {
    return SimpleDialog(
-     title: const Text('Phone Ringtone'),
-     children: currency.map((r) => RadioListTile(
-       title:  Text(r),
+     title: const Text('Select Currency'),
+     children: cur.map((r) => RadioListTile(
+       title:  Text(currency[r]),
        groupValue: selectedCurrency,
        selected: r == selectedCurrency,
        value: r,
        onChanged: (dynamic val) {
            selectedCurrency = val;
+           Provider.of<ExpenseData>(context,listen: false).addSettings(0, r);
            Navigator.of(context).pop();
        },
      )).toList(),
@@ -67,120 +69,129 @@ class Settings extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final toLaunch = Uri.parse('https://github.com/gautham2k3/SpendZ');
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon:const Icon(Icons.navigate_before_rounded),
-            iconSize: 30,
-            onPressed: () {
-              Navigator.pop(context);
-            }
-        ),
-        title:const Text('Settings'),
-        centerTitle: true,
-      ),
-        body :CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  alignment: Alignment.center,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text("Common",
-                          ),
-                        ],
-                      ),
-                       ListTile(
-                        leading: const Icon(Icons.currency_rupee_rounded),
-                        title: const Text("Currency"),
-                        subtitle: Text(selectedCurrency!),
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return CurencyHandler(context);
-                            },
-                          );
-                        },
-                      ),
-                      const Divider(),
-                       ListTile(
-                        leading: const Icon(Icons.category_rounded),
-                        title: const Text("Categories"),
-                        trailing:const Icon(Icons.keyboard_arrow_right),
-                        subtitle:const  Text("Add or Remove"),
-                        onTap: () => handleTap(context),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text("Security"),
-                        ],
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.fingerprint),
-                        title: const Text("Use fingerprint"),
-                        trailing: Switch(
-                            value: fingerprintSwitchVal,
-                            activeColor: Colors.blueAccent,
-                            onChanged: (val) { }),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        leading: const Icon(Icons.lock),
-                        title: const Text("Change Password"),
-                        trailing: Switch(
-                            value: changePassSwitchVal,
-                            activeColor: Colors.blueAccent,
-                            onChanged: (val) {
-                            }),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text("Data"),
-                        ],
-                      ),
-                       ListTile(
-                        leading:const Icon(Icons.phonelink_erase_rounded, color: Colors.red,),
-                        title:const Text("Erase all Data",selectionColor: Colors.red),
-                        onTap: () => showAlertDialog(context),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text("Social"),
-                        ],
-                      ),
-                      const Divider(),
-                      ListTile(
-                        leading: const Icon(SimpleIcons.github, color: Colors.black),
-                        title: const Text("GitHub"),
-                        subtitle: const Text('Star & Share the Repo'),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.open_in_new),
-                          tooltip: 'Open Link in Browser',
-                          onPressed: () {
-                            launchUrl(
-                              toLaunch,
-                              mode: LaunchMode.externalApplication,
+    return Consumer<ExpenseData>(
+        builder: (context,value,child)
+    {
+      selectedCurrency = Provider.of<ExpenseData>(context, listen: false).getSavedSettings(1);
+      print(selectedCurrency);
+      return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+                icon: const Icon(Icons.navigate_before_rounded),
+                iconSize: 30,
+                onPressed: () {
+                  Navigator.pop(context);
+                }
+            ),
+            title: const Text('Settings'),
+            centerTitle: true,
+          ),
+          body: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    alignment: Alignment.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Text("Common",
+                            ),
+                          ],
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.currency_exchange),
+                          title: const Text("Currency"),
+                          subtitle: Text(currency[selectedCurrency]),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return CurencyHandler(context);
+                              },
                             );
                           },
                         ),
-                      ),
-                      const Divider(),
-                    ],
+                        const Divider(),
+                        ListTile(
+                          leading: const Icon(Icons.category_rounded),
+                          title: const Text("Categories"),
+                          trailing: const Icon(Icons.keyboard_arrow_right),
+                          subtitle: const Text("Add or Remove"),
+                          onTap: () => handleTap(context),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Text("Security"),
+                          ],
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.fingerprint),
+                          title: const Text("Use fingerprint"),
+                          trailing: Switch(
+                              value: fingerprintSwitchVal,
+                              activeColor: Colors.blueAccent,
+                              onChanged: (val) {}),
+                        ),
+                        const Divider(),
+                        ListTile(
+                          leading: const Icon(Icons.lock),
+                          title: const Text("Change Password"),
+                          trailing: Switch(
+                              value: changePassSwitchVal,
+                              activeColor: Colors.blueAccent,
+                              onChanged: (val) {}),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Text("Data"),
+                          ],
+                        ),
+                        ListTile(
+                          leading: const Icon(
+                            Icons.phonelink_erase_rounded, color: Colors.red,),
+                          title: const Text(
+                              "Erase all Data", selectionColor: Colors.red),
+                          onTap: () => showAlertDialog(context),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Text("Social"),
+                          ],
+                        ),
+                        const Divider(),
+                        ListTile(
+                          leading: const Icon(
+                              SimpleIcons.github, color: Colors.black),
+                          title: const Text("GitHub"),
+                          subtitle: const Text('Star & Share the Repo'),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.open_in_new),
+                            tooltip: 'Open Link in Browser',
+                            onPressed: () {
+                              launchUrl(
+                                toLaunch,
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                          ),
+                        ),
+                        const Divider(),
+                      ],
+                    ),
+
                   ),
+                )
+              ])
 
-                ),
-              )
-            ])
-
+      );
+    },
     );
   }
 
