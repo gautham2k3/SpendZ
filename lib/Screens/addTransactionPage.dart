@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Data/Expense_data.dart';
 import '../Model/Expense_item.dart';
+import '../utils.dart';
 
 enum TypeEI {expense,income}
 
@@ -37,20 +38,20 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
   // Form key for validation
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  int? _value;
+  var avlC=['Education','Food','Travel','Miscellaneous'];
 
-  // Function to handle form submission
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       double leftBalance=Provider.of<ExpenseData>(context,listen: false).getBalance()-amount!;
       dateTime=DateTime.now();
-      // Perform your transaction saving logic here
-      // For this example, we'll just print the details
+
       print('Title: $title');
       print('Amount: $amount');
       print('Category: $selectedCategory');
       print('Date & Time: $dateTime');
 
-      // You can save the transaction data to a database or a state management solution here
+
       ExpenseItem newExpense=ExpenseItem(
           name: title.toString(),
           dateTime: DateTime.now(),
@@ -250,54 +251,94 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 },
               ),
               const SizedBox(height: 20),
-              Visibility(
-                visible: selectedIndex==TypeEI.expense,
-                  maintainState: true,
-                  maintainAnimation: true,
-                  maintainSize: true,
-                  child: DropdownButtonFormField<String>(
-                decoration:const InputDecoration(
-                  labelText: 'Category',
-                  border: OutlineInputBorder(),
-                  filled: true,
+              // Visibility(
+              //   visible: selectedIndex==TypeEI.expense,
+              //     maintainState: true,
+              //     maintainAnimation: true,
+              //     maintainSize: true,
+              //     child: DropdownButtonFormField<String>(
+              //   decoration:const InputDecoration(
+              //     labelText: 'Category',
+              //     border: OutlineInputBorder(),
+              //     filled: true,
+              //   ),
+              //   value: selectedCategory,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       selectedCategory = value;
+              //     });
+              //   },
+              //   items: [
+              //     'Stationery',
+              //     'Food',
+              //     'Entertainment',
+              //     'Miscellaneous',
+              //   ].map<DropdownMenuItem<String>>((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please select a category';
+              //     }
+              //     return null;
+              //   },
+              // ),
+              // ),
+              // const SizedBox(height: 20),
+              Wrap(
+                children:<Widget>[
+                  const SizedBox(height: 10.0),
+                  Wrap(
+                    spacing: 3.0,
+                    children: List<Widget>.generate(
+                      avlC.length,
+                          (int index) {
+                        return ChoiceChip(
+                          label: Text(avlC[index]),
+                          labelStyle: TextStyle(
+                              color: _value==index? Colors.white : Colors.black
+                          ),
+                          selected: _value == index,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          onSelected: (bool selected) {
+                            setState(() {
+                              _value = selected ? index : null;
+                            });
+                          },
+                          backgroundColor: Colors.blue.shade50,
+                        );
+                        },
+                      ).toList(),
+                    ),
+                  ],
                 ),
-                value: selectedCategory,
-                onChanged: (value) {
-                  setState(() {
-                    selectedCategory = value;
-                  });
-                },
-                items: [
-                  'Stationery',
-                  'Food',
-                  'Entertainment',
-                  'Miscellaneous',
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please select a category';
-                  }
-                  return null;
-                },
-              ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submitForm,
-                style: ButtonStyle(
-                  side: MaterialStateProperty.all(
-                    const BorderSide(
-                      color: Colors.blue,
-                      width: 1,
+              const SizedBox(height: 40,),
+              Center(
+                child:
+                ElevatedButton(
+                  onPressed: _submitForm,
+                  style: ButtonStyle(
+                    alignment: Alignment.center,
+                    side: MaterialStateProperty.all(
+                      const BorderSide(
+                        color: Colors.green,
+                        width: 2,
+                      ),
                     ),
                   ),
-                ),
-                child: const Text('Add Transaction'
+                  child: Text('Add Transaction',
+                    style: SafeGoogleFont (
+                      'Encode Sans SC',
+                      fontSize: 18,
+                    ),
+                    textScaleFactor: 1.1,
+                    selectionColor: Colors.green,
+                  ),
                 ),
               ),
             ],
