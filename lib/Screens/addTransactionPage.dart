@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Data/Expense_data.dart';
-import '../Model/Expense_item.dart';
-import '../utils.dart';
+import 'package:spendz/Data/Expense_data.dart';
+import 'package:spendz/Model/Expense_item.dart';
+import 'package:spendz/utils.dart';
+import 'package:spendz/Screens/Settings/Categories.dart';
 
 enum TypeEI {expense,income}
 
@@ -172,9 +173,10 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
   @override
   Widget build(BuildContext context) {
+    avlC=hive.getCategory();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Transaction'),
+        title: const Text('Add Transaction'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -235,6 +237,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                     labelText: selectedIndex==TypeEI.expense ? 'Expense': 'Income',
                 ),
                 keyboardType: TextInputType.number,
+                autofocus: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an amount';
@@ -250,7 +253,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   });
                 },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               // Visibility(
               //   visible: selectedIndex==TypeEI.expense,
               //     maintainState: true,
