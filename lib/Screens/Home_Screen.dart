@@ -23,10 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     Provider.of<ExpenseData>(context,listen: false).prepareData();
+    refreshB();
   }
   void refreshB()
   {
-    balance=Provider.of<ExpenseData>(context, listen: false).getBalance();
+    setState(() {
+      balance=Provider.of<ExpenseData>(context, listen: false).getBalance();
+    });
   }
   IconData getCategoryIcon(String name) {
     String lowercaseName = name.toLowerCase();
