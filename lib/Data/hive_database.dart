@@ -31,7 +31,12 @@ class HiveDataBase {
   double readBalance() {
     return _myBox.get("Balance") ?? 0.0; // Default to 0.0 if no balance is stored.
   }
-
+  void setCategory(List<String> avlbC){
+    _myBox.put("Category",avlbC);
+  }
+  List<String> getCategory(){
+    return _myBox.get("Category") ;
+  }
   List<ExpenseItem> readData() {
     List savedExpenses = _myBox.get("All Expenses")?? [] ;
     List<ExpenseItem> allExpenses = [];
