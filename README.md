@@ -1,10 +1,8 @@
-<p align="center">
-  <img width="300" height="300" src="https://drive.google.com/uc?export=view&id=18d8uH9hWtnZGxdLsQ9MJMCJIxaFOgajK">
-</p>
-
 # SpendZ
 
 SpendZ is a mobile app built using Flutter that helps users track and manage their daily expenses. With SpendZ, users can easily log their expenses, view their spending history, and analyze their spending patterns.
+
+[![Free-Apple-i-Phone-14-Pro-Max-App-Screen-Mockup-PSD.png](https://i.postimg.cc/5yZB7BQL/Free-Apple-i-Phone-14-Pro-Max-App-Screen-Mockup-PSD.png)](https://postimg.cc/vxtxD6zZ)
 
 ## Features
 
